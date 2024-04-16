@@ -68,10 +68,10 @@
             let movieImage = $('#movieImage').val();
             let movieTitle = $('#movieTitle').val();
             let movieScore = $('#movieScore').val();
-            let movieComment = $('#movieComment').val(); 
+            let movieComment = $('#movieComment').val();
 
-            let temp_html = 
-            `
+            let temp_html =
+                `
             <div class="col">
                 <div class="card h-100">
                     <img src="${movieImage}"
@@ -86,7 +86,26 @@
             `;
             $('#movie').append(temp_html);
             //https://t1.daumcdn.net/movie/43b78cde98431700e717960351d94206e6ea4553
+
         }
+
+        //http://spartacodingclub.shop/sparta_api/weather/seoul 현재 서울의 온도
+
+        let url = "http://spartacodingclub.shop/sparta_api/weather/seoul";
+        fetch(url).then(res => res.json()).then(data => {
+            let temp = data['temp'];
+            $('#message2').text(temp)
+
+            if (temp < 20) {
+                $('#feeling').text('추워요')
+            } else {
+                $('#feeling').text('더워요')
+            }
+        })
+
+        $(document).ready(function () {
+            //alert('안녕!');
+        })
     </script>
 
 </head>
@@ -107,6 +126,7 @@
                     <li><a href="#" class="nav-link px-2 text-white">시리즈</a></li>
                     <li><a href="#" class="nav-link px-2 text-white">영화</a></li>
                     <li><a href="#" class="nav-link px-2 text-white">내가 찜한 콘텐츠</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">현재 서울의 온도: <span id="message2">0</span>도로 <span id="feeling"> 몰루?</span></a></li>
                 </ul>
 
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
@@ -165,7 +185,7 @@
 
     </div>
     <div class="mycards">
-        <div id= "movie" class="row row-cols-1 row-cols-md-4 g-4">
+        <div id="movie" class="row row-cols-1 row-cols-md-4 g-4">
             <div class="col">
                 <div class="card h-100">
                     <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
